@@ -9,6 +9,12 @@
         <p class="text-muted m-b-30">This table is a list of all classes crated for the course</p>
         <div class="table-responsive">
            @include('partials.courseinfo',['course'=>$course])
+           <a class="btn btn-sm btn-success" href="{{route('courses.show',['course'=>$course->id])}}">
+            <i class="fa fa-eye"></i> Course</a>
+            @role('student')
+              <a class="btn btn-sm btn-warning" href="{{route('students.courses.attendance',['course'=>$course->id])}}">
+              <i class="fa fa-list-alt"></i> My Attendance</a>
+              @endrole
             <table id="table1" class="table table-striped my-data-table">
               <thead>
                 <tr>
@@ -25,16 +31,16 @@
                       <td>{{$classe->id}}</td>
                       <td>{{$classe->date}}</td>
                       <td>{{$classe->time}}</td>
-                      <td>{{App\User::find($classe->created_by)->name}}</td>
+                      <td>{{$classe->class_lecturer()->user->name}}</td>
                       <td class="text-center">
-                           <a class="btn btn-sm btn-success" href="route('courses.show',['course'=>$course->id])}}">
+                           <a class="btn btn-sm btn-success" href="{{route('courses.classes.show',['classe'=>$classe->id])}}">
                             <i class="fa fa-eye"></i> View</a>
-                          <a class="btn btn-sm btn-warning" href="route('courses.edit',['course'=>$course->id])}}">
-                            <i class="fa fa-pencil"></i> Update</a>
-                          <a class="btn btn-sm btn-info" href="route('courses.classes',['course'=>$course->id])}}"><i class="fa fa-table"></i> Classes</a>
+                            @role('lecturer')
+                          <a class="btn btn-sm btn-info" href="{{route('courses.classes.attendance',['classe'=>$classe->id])}}"><i class="fa fa-list-alt"></i> Attendance</a>
                           <a target="_blank" class="btn btn-sm btn-primary" href="{{route('courses.printtokens',['classe'=>$classe->id])}}">
                             <i class="fa fa-print"></i> Print Tokrns
                           </a>
+                          @endrole
                       </td>
                     </tr>
                     @endforeach

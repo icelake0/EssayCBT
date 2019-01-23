@@ -14,7 +14,7 @@ class Course extends Model
         return $this->belongsToMany('App\Student','course_student','course_id','student_id');
     }
     public function course_lecturer(){
-   		return Lecturer::where('id',$this->created_by)->first();
+   		return Lecturer::where('id',$this->created_by)->with('user')->first();
     }
     public function classes()
     {

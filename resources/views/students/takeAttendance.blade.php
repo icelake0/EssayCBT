@@ -9,7 +9,7 @@
         <h3 class="box-title m-b-0">Take Attendance</h3>
         <p class="text-muted m-b-30 font-13">Submit the token given in class to prove attendance</p>
         <div class="row">
-        	//add the course and class infromation here
+        	@include('partials.classeinfo',['classe'=>$classe])
             <div class="col-sm-12 col-xs-12">
                 <form method='post' class="form-horizontal" action='{{ route("students.takeattendance",["classe"=>$classe->id]) }}'>
                     @csrf

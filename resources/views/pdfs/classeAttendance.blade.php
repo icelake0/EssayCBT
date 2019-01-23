@@ -1,3 +1,4 @@
+<?php $total_attendance=0;?>
 <style>
     table, th, td {
     border: 1px solid black;
@@ -16,8 +17,23 @@
     	@foreach($students as $student)
         <tr>
             <td>{{$student->reg_number}}</td>
-             <td>{!!($student->attendances->count())?'+':'-'!!}</td>
+            <td>
+            @php
+            if($student->attendances->count()){
+                echo '+';
+                $total_attendance++;
+            }else{
+                echo '-';
+            }
+            @endphp
+            </td>
         </tr>
         @endforeach
     </tbody>
+    <thead>
+        <tr>
+            <th>Total Present Students </th>
+            <th>{{$total_attendance}}</th>              
+        </tr>
+    </thead>
 </table>

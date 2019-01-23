@@ -58,48 +58,22 @@
                     <!-- Logo -->
                     <a class="logo" href="{{route('home')}}">
                         <!-- Logo icon image, you can use font-icon also --><b>
-                        <!--This is dark logo icon--><img src="/plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+                        <!--This is dark logo icon--><!--This is light logo icon--><img src="/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
                      </b>
                         <!-- Logo text image you can use text also --><span class="hidden-xs">
-                        <!--This is dark logo text--><img src="/plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                        <!--This is dark logo text--><!--This is light logo text--><span>{{env('APP_NAME')}}<span>
                      </span> </a>
                 </div>
                 <!-- /Logo -->
                 <!-- Search input and Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"> <i class="mdi mdi-gmail"></i>
-                            <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                        </a>
-                        <ul class="dropdown-menu mailbox animated bounceInDown">
-                            <li>
-                                <div class="drop-title">You have 4 new messages</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                    <a href="#">
-                                        <div class="user-img"> <img src="../plugins/images/users/pawandeep.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                        <div class="mail-contnet">
-                                            <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span> </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
                 </ul>
                 <!-- This is the message dropdown -->
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <!-- /.Task dropdown -->
                     <!-- /.dropdown -->
-                    <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-                    </li>
+                    
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img src="{{ Auth::user()->avatar }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
@@ -141,11 +115,17 @@
                 <ul class="nav" id="side-menu">
                     <li><a href="{{route('home')}}" class="waves-effect"><i data-icon="7" class="linea-icon icon-home  fa-fw"></i><span class="hide-menu">Home </span></a> </li>
                     <li><a href="{{route('profile',['user'=>Auth::user()->id])}}" class="waves-effect "><i data-icon="7" class="linea-icon icon-user fa-fw"></i><span class="hide-menu">Profile </span></a> </li>
-                    <li>
-                        <a href="{{route('courses.index')}}" class="waves-effect "><i data-icon="7" class="linea-icon fa fa-table fa-fw"></i><span class="hide-menu">Courses</span></a>
-                    </li>
-                    <li>
-                        <a href="{{route('courses.create')}}" class="waves-effect "><i data-icon="7" class="fa fa-plus fa-fw"></i><span class="hide-menu">New Course </span></a>
+                    <li> <a href="/courses" class="waves-effect"><i class="fa fa-list-alt fa-fw"></i> <span class="hide-menu">Course<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            @role('lecturer')
+                            <li> <a href="{{route('courses.index')}}"><i class="fa fa-table fa-fw"></i><span class="hide-menu">List Courses</span></a> </li>
+                            <li> <a href="{{route('courses.create')}}"><i class="fa fa-plus fa-fw"></i><span class="hide-menu">New Course</span></a> </li>
+                            @endrole
+                             @role('student')
+                            <li> <a href="{{route('courses.index')}}"><i class="fa fa-table fa-fw"></i><span class="hide-menu">My Courses</span></a> </li>
+                            <li> <a href="{{route('students.findcourse')}}"><i class="fa fa-plus fa-fw"></i><span class="hide-menu">Find Course</span></a> </li>
+                            @endrole
+                        </ul>
                     </li>
                     <li><a href="{{route('webauth.manageusers')}}" class="waves-effect"><i data-icon="7" class="linea-icon fa fa-users fa-fw"></i><span class="hide-menu">Manage Users</span></a> </li>
                     <li><a href='{{route("logout")}}' onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
@@ -163,7 +143,6 @@
                     <!-- /.page title -->
                     <!-- .breadcrumb -->
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="{{route('profile',['user'=>Auth::user()->id])}}?settings=settings" class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></a>
-                        <a href="#" target="" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Contact Us</a>
                         <!--ol class="breadcrumb">
                             <li><a href="#">Dashboard</a></li>
                             <li class="active">Starter Page</li>
@@ -181,7 +160,7 @@
                 
             </div>
             <!-- /.container-fluid -->
-            <footer class="footer text-center"> {{date('Y')}} &copy; {{env('APP_NAME')}} brought to you by icelakeinc </footer>
+            <footer class="footer text-center"> {{date('Y')}} &copy; {{env('APP_NAME')}}</footer>
         </div>
         <!-- /#page-wrapper -->
     </div>

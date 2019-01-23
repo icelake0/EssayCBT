@@ -13,7 +13,7 @@
         	<th>{{$key+1}}</th>
         	@endforeach
             <th>Total</th>
-            <th>Percentage</th>
+            <th>%</th>
        
         </tr>
     </thead>

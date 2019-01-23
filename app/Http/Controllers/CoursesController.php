@@ -75,7 +75,9 @@ class CoursesController extends Controller
      */
     public function show(Course $course)
     {
-        dd($course);
+        return view('courses.show',[
+            'course'=>$course
+        ]);
     }
 
     /**
@@ -99,6 +101,14 @@ class CoursesController extends Controller
     public function update(Request $request, Course $course)
     {
         //
+    }
+    public function updateClasse(Classe $classe){
+        dd($classe);
+    }
+    public function showClasse(Classe $classe){
+        return view('courses.showClasse',[
+            'classe'=>$classe
+        ]);
     }
     public function addlecturers(Request $request, Course $course){
         if($course->created_by!==Auth::user()->lecturer->id){
@@ -157,7 +167,6 @@ class CoursesController extends Controller
     public function createClasse(Course $course, Request $request){
         $lecturer=Auth::user()->lecturer;
         if(!$course->lecturers->contains($lecturer->id)){
-            dd('heloo');
             return back()->withInput()->with('error','You are not a member of this course team, inform the course lecturer to add you as a member to be able to create a class for the course');
         }
         if($request->isMethod('post')){
@@ -268,7 +277,6 @@ class CoursesController extends Controller
             'classe'=>$classe,
             'students'=>$students
         ];
-
     }
     /**
      * Remove the specified resource from storage.

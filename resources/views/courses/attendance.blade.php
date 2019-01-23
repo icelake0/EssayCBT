@@ -11,6 +11,8 @@
             @include('partials.courseinfo',['course'=>$course])
             <a class="btn btn-sm btn-primary" target='_BLANK' href="{{route('courses.printattendance',['course'=>$course->id])}}">
                             <i class="fa fa-print"></i> Print</a>
+            <a class="btn btn-sm btn-info" href="{{route('courses.show',['course'=>$course->id])}}">
+            <i class="fa fa-eye"></i> Course</a>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <thead>
@@ -20,7 +22,7 @@
                         	<th>{{$classe->date}}({{$classe->time}})</th>
                         	@endforeach
                         	<th>Total</th>
-                            <th>Percentage</th>
+                            <th>%</th>
                        
                         </tr>
                     </thead>

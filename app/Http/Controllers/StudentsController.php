@@ -54,11 +54,7 @@ class StudentsController extends Controller
                 $attendance->student_id=$student->id;
                 $attendance->token_id=$token->id;
                 if($attendance->save()){
-                    dd('attendance taken now redirect wisely LOLZ');
-                    //this is what i had in my mid for the redirect but not nice
-                    //route not even existing as at now
-                    //how do you even assure the sudent that the atendance was taken
-                    // return redirect(route('classe.show',['classe','$classe->id']))->with('success','Your attendance have been taken for this class');
+                    return redirect(route('students.courses.attendance',['course','$course->classe->id']))->with('success','Your attendance have been taken for this class');
                 }else{
                     return back()->with('error','Something went wrong please try again');
                 }
@@ -66,6 +62,24 @@ class StudentsController extends Controller
         }else{
             return view('students.takeAttendance',['classe'=>$classe]);
         }
+    }
+    public function attendance(Course $course){
+        $classes=$course->classes()->with(['tokens'])->get();
+        $classes=$classes->map(function($classe){
+            $classe->tokens=$classe->tokens->map(function($token){
+                return $token->id;
+            })->toArray();
+            return $classe;
+        });
+        $student=Auth::user()->student()->with(['attendances'])->first();
+        $student_tokens=$student->attendances->map(function($student_token){
+            return $student_token->token_id;
+        })->toArray();
+        return view('students.attendance',[
+            'course'=>$course,
+            'classes'=>$classes,
+            'student_tokens'=>$student_tokens
+        ]);
     }
     public function index()
     {

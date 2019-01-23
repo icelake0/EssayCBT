@@ -13,4 +13,8 @@ class Classe extends Model
     {
         return $this->hasMany('App\Token','class_id');
     }
+    public function class_lecturer(){
+   		return Lecturer::where('id',$this->created_by)->with('user')->first();
+    }
+
 }

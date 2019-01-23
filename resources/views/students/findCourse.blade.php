@@ -21,7 +21,11 @@
                     <div class="form-group">
                         <label class="col-sm-12">Semester</label>
                         <div class="col-sm-12">
-                            <input type="number" class="form-control" placeholder="semester" name="semester" required>
+                            <select class="form-control" name="semester" required>
+                                <option disabled="" selected="" readonly>--Select Semester--</option>
+                                <option value=1>First Semester</option>
+                                <option value=2>Second Semester</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">

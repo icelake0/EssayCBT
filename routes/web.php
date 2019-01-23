@@ -48,9 +48,10 @@ Route::group(['middleware'=>['auth']], function(){
 	Route::group(['middleware'=>['role:superadmin|admin']], function(){
 		Route::match(['get', 'post'],'/teacherrequest/{teacherRequest}/assignteacher', 'TeacherRequestsController@assignTeacher')->name('teacherrequest.assignteacher');
 	});
+	Route::resource('courses', 'CoursesController');
 	//routes accessable by lecturers only
 	Route::group(['middleware'=>['role:lecturer']], function(){
-		Route::resource('courses', 'CoursesController');
+		//Route::resource('courses', 'CoursesController',['only'=>['index','show','create','store']]);
 		Route::match(['get', 'post'],'/courses/{course}/addlecturers', 'CoursesController@addLecturers')->name('courses.addlecturers');
 		Route::match(['get', 'post'],'/courses/{course}/createclasse', 'CoursesController@createClasse')->name('courses.createclasse');
 		Route::get('/courses/classe/{classe}/printTokens', 'CoursesController@printTokens')->name('courses.printtokens');
@@ -59,12 +60,18 @@ Route::group(['middleware'=>['auth']], function(){
 		Route::get('/courses/{course}/printattendance', 'CoursesController@printAttendance')->name('courses.printattendance');
 		Route::get('/courses/classes/{classe}/attendance', 'CoursesController@classeAttendance')->name('courses.classes.attendance');
 		Route::get('/courses/classes/{classe}/printattendance', 'CoursesController@printClasseAttendance')->name('courses.classes.printattendance');
+		Route::get('/courses/classes/{classe}/update', 'CoursesController@updateClasse')->name('courses.classes.update');
+		Route::get('/courses/classes/{classe}/show', 'CoursesController@showClasse')->name('courses.classes.show');
 	});
 	//routes accessable by students only
 	Route::group(['middleware'=>['role:student']], function(){
+		//Route::resource('courses', 'CoursesController',['only'=>['index','show']]);
 		Route::match(['get', 'post'],'/students/findcourse', 'StudentsController@findCourse')->name('students.findcourse');
 		Route::match(['get', 'post'],'/courses/{course}/studentregister', 'CoursesController@studentRegister')->name('courses.studentregister');
 		Route::match(['get', 'post'],'/students/classe/{classe}/takeattendance', 'StudentsController@takeAttendance')->name('students.takeattendance');
+		Route::get('/courses/{course}/classes', 'CoursesController@classes')->name('courses.classes');
+		Route::get('/courses/classes/{classe}/show', 'CoursesController@showClasse')->name('courses.classes.show');
+		Route::get('/students/courses/{course}/attendance', 'StudentsController@attendance')->name('students.courses.attendance');
 	});
 
 	Route::group(['middleware'=>['role:teacher']], function(){

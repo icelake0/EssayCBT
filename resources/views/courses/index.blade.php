@@ -28,14 +28,18 @@
                       <td class="text-center">
                            <a class="btn btn-sm btn-success" href="{{route('courses.show',['course'=>$course->id])}}">
                             <i class="fa fa-eye"></i> View</a>
-                          <a class="btn btn-sm btn-warning" href="{{route('courses.edit',['course'=>$course->id])}}">
-                            <i class="fa fa-pencil"></i> Update</a>
                           <a class="btn btn-sm btn-info" href="{{route('courses.classes',['course'=>$course->id])}}"><i class="fa fa-table"></i> Classes</a>
+                           @role('lecturer')
                           <a class="btn btn-sm btn-primary" href="{{route('courses.createclasse',['course'=>$course->id])}}"><i class="fa fa-plus"></i> New Class</a>
                           <a class="btn btn-sm btn-warning" href="{{route('courses.addlecturers',['course'=>$course->id])}}">
                             <i class="fa fa-plus"></i> Add Lecturers</a>
                           <a class="btn btn-sm btn-success" href="{{route('courses.attendance',['course'=>$course->id])}}">
-                            <i class="fa fa-eye"></i> Attendance</a>
+                            <i class="fa fa-list-alt"></i> Attendance</a>
+                          @endrole
+                          @role('student')
+                          <a class="btn btn-sm btn-warning" href="{{route('students.courses.attendance',['course'=>$course->id])}}">
+                            <i class="fa fa-list-alt"></i> My Attendance</a>
+                          @endrole
                       </td>
                     </tr>
                     @endforeach
