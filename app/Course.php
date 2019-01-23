@@ -20,4 +20,11 @@ class Course extends Model
     {
         return $this->hasMany('App\Classe','course_id');
     }
+    public function questions(){
+        return $this->hasMany('App\Question','course_id');
+    }
+    public function exams(){
+        return $this->hasMany('App\Exam','course_id');
+    }
+
 }

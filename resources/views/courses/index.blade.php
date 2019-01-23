@@ -28,7 +28,7 @@
                       <td class="text-center">
                            <a class="btn btn-sm btn-success" href="{{route('courses.show',['course'=>$course->id])}}">
                             <i class="fa fa-eye"></i> View</a>
-                          <a class="btn btn-sm btn-info" href="{{route('courses.classes',['course'=>$course->id])}}"><i class="fa fa-table"></i> Classes</a>
+                          <a class="btn btn-sm btn-info" href="{{route('questions.list',['course'=>$course->id])}}"><i class="fa fa-table"></i> Questions</a>
                            @role('lecturer')
                           <a class="btn btn-sm btn-primary" href="{{route('courses.createclasse',['course'=>$course->id])}}"><i class="fa fa-plus"></i> New Class</a>
                           <a class="btn btn-sm btn-warning" href="{{route('courses.addlecturers',['course'=>$course->id])}}">

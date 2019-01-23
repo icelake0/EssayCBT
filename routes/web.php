@@ -10,7 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::resource('questions', 'QuestionsController');
+Route::match(['get', 'post'],'/questions/{course}/create', 'QuestionsController@createQuestions')->name('questions.createQuestions');
+Route::get('/questions/{course}/list','QuestionsController@index')->name('questions.list');
+Route::resource('exams', 'ExamsController');
+Route::match(['get', 'post'],'/exams/{course}/create', 'ExamsController@createExam')->name('exams.createExam');
+Route::get('/exams/{course}/list','ExamsController@index')->name('exams.list');
 Route::get('/', function () {
     //return view('welcome');
     return redirect('/login');
