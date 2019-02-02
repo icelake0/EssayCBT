@@ -115,6 +115,7 @@
                 <ul class="nav" id="side-menu">
                     <li><a href="{{route('home')}}" class="waves-effect"><i data-icon="7" class="linea-icon icon-home  fa-fw"></i><span class="hide-menu">Home </span></a> </li>
                     <li><a href="{{route('profile',['user'=>Auth::user()->id])}}" class="waves-effect "><i data-icon="7" class="linea-icon icon-user fa-fw"></i><span class="hide-menu">Profile </span></a> </li>
+                    @if(Entrust::hasRole('student')||Entrust::hasRole('lecturer'))
                     <li> <a href="/courses" class="waves-effect"><i class="fa fa-list-alt fa-fw"></i> <span class="hide-menu">Course<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             @role('lecturer')
@@ -127,7 +128,10 @@
                             @endrole
                         </ul>
                     </li>
+                    @endif
+                    @if(Entrust::hasRole('superadmin')||Entrust::hasRole('admin')))
                     <li><a href="{{route('webauth.manageusers')}}" class="waves-effect"><i data-icon="7" class="linea-icon fa fa-users fa-fw"></i><span class="hide-menu">Manage Users</span></a> </li>
+                    @endif
                     <li><a href='{{route("logout")}}' onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a></li>
                 </ul>
             </div>

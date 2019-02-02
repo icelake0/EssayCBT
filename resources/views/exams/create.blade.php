@@ -23,6 +23,11 @@
             <div class="input-group-addon"><i class="ti-book"></i></div>
             <input type="number" class="form-control" placeholder="Exam Duration(in miniutes)" name='duration' required> 
         </div>
+        <label for="duration">Question Point</label>
+        <div class="input-group">
+            <div class="input-group-addon"><i class="ti-book"></i></div>
+            <input type="number" class="form-control" placeholder="Question point" name='point' required> 
+        </div>
         <h3 class="box-title m-b-0">Select Questions</h3>
         <p class="text-muted m-b-30">Select Exam Questions from the table by checking the boxes</p>
         <div class="table-responsive">

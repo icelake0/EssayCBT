@@ -5,6 +5,5 @@
 		<li><i class="fa fa-caret-right text-info"></i><strong>Semester : </strong>{{($course->semester==1)?'First':'Second'}}</li>
         <li><i class="fa fa-caret-right text-info"></i><strong>Title : </strong>{{$course->title}}</li>
         <li><i class="fa fa-caret-right text-info"></i><strong>Code : </strong>{{$course->code}}</li>
-        <li><i class="fa fa-caret-right text-info"></i><strong>Total Classes : </strong>{{$course->classes->count()}}</li>
     </ul>
 </blockquote>

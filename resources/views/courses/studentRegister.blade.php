@@ -10,7 +10,7 @@
         <p class="text-muted m-b-30 font-13">Privide a correct registration key obtained from the course lecturer to register</p>
         <div class="row">
             <div class="col-sm-12 col-xs-12">
-            	//kindly put information of the course being registered here
+            	@include('partials.courseinfo',['course'=>$course])
                 <form method='post' class="form-horizontal" action="{{ route('courses.studentregister',['course'=>$course->id]) }}">
                     @csrf
                     <div class="form-group">
