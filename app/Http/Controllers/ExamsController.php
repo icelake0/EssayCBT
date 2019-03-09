@@ -71,6 +71,7 @@ class ExamsController extends Controller
         }
         //check if its the right time to take the exam
         $now=Carbon::now();
+        $now->addHour(1);
         $exam_time=new Carbon(date($exam->date).' '.date($exam->time));
         $due_time=new Carbon(date($exam->date).' '.date($exam->time));
         $due_time=$due_time->addMinute($exam->duration);
